@@ -1,0 +1,43 @@
+server:
+  port: 8081
+spring:
+#  devtools:
+#    restart:
+#      enabled: true  #设置开启热部署
+#      additional-paths: src/main/java,resources/**,static/** #重启目录
+#    livereload:
+#      enabled: true
+  jpa:
+    database: h2
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:h2:mem:test;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    data: classpath:db/*.sql
+# swagger配置
+swagger:
+  # 标题
+  title: "Spring Boot 构建RESTful API"
+  contact:
+    # 维护人
+    name: "yyc"
+    email: "34782655@qq.com"
+    url: "https://yinyicao.work"
+  # 版本
+  version: "1.0"
+  # 描述
+  description: "Spring Boot + RESTFUL + Gradle + Spring Data JPA + H2database学习"
+  # swagger扫描的基础包，默认：全扫描
+  base-package: "com.yyc.demo.controller"
+
+  # 需要处理的基础URL规则，默认：/**
+  # base-path: /**
+  # 需要排除的URL规则，默认：空
+  # exclude-path: ""
+
+  license: "Apache License, Version 2.0"
+  license-url: "https://www.apache.org/licenses/LICENSE-2.0.html"
