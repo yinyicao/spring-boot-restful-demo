@@ -1,6 +1,6 @@
 # SpringBoot+RestFul实践
 ## 项目说明
-- 仅用于学习使用
+- 仅限学习使用
 - 项目包含lombok插件，需要IDE插件支持
 - 项目使用H2内存数据库
 ## swagger文档
