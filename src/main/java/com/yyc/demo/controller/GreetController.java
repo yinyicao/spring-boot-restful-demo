@@ -7,6 +7,9 @@ import com.yyc.demo.dao.GreetingRepository;
 import com.yyc.demo.entity.Greeting;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
+
 /**
  * @program: demorestful
  * @description: 测试RESTFUL
@@ -25,7 +28,7 @@ public class GreetController {
     }
 
     /**
-     * 测试方法
+     * 测试方法1
      *
      * 注解@RequestParam，一般使用在 PUT，POST，
      * 用来获取 表单或url中的 基本数据类型
@@ -34,7 +37,22 @@ public class GreetController {
      */
     @GetMapping("/test")
     public Greeting test(@RequestParam(value = "name",defaultValue = "World!") String name){
-        return new Greeting(counter.incrementAndGet(),String.format(TEMPLATE,name));
+        return Greeting
+                .builder()
+                .id(counter.incrementAndGet())
+                .content(String.format(TEMPLATE,name))
+                .build();
+    }
+
+    /**
+     * 测试方法2
+     *
+     * @param data
+     * @return
+     */
+    @GetMapping("/test2")
+    public String test2(@RequestParam(value = "data",defaultValue = "Hello,World!") String data){
+        return data;
     }
 
 
@@ -92,15 +110,17 @@ public class GreetController {
     }
 
     /**
-     *
+     * 新增一个Greet
      *
      * 不加@RequestBody能使用 url 参数，或者表单的形式传输，
      * 并且可以传输对象，SpringBoot 会自动对字段进行映射
+     *
+     * "@Vallid"注解用来校验参数，相应的Greeting实体属于要用注解配置校验规则
      * @param greeting
      * @return
      */
     @PostMapping("/greeting")
-    Greeting addGreet(Greeting greeting){
+    Greeting addGreet(@RequestBody @Valid Greeting greeting){
         return this.greetingRepository.save(greeting);
     }
 

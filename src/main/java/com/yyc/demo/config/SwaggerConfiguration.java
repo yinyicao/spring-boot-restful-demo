@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 /**
- * Swagger配置类.
+ * Swagger配置类.生成API文档，文档地址：http://localhost:8081/swagger-ui.html
  *
  * "@EnableSwagger2" Swagger的开关，表示已经启用Swagger
  * "@Configuration" 声明当前配置类
