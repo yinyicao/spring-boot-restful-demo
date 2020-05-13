@@ -2,7 +2,7 @@ package com.yyc.demo.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yyc.demo.exception.APIException;
+import com.yyc.demo.exception.ApiException;
 import com.yyc.demo.vo.ResponseCode;
 import com.yyc.demo.vo.ResponseVO;
 import org.springframework.core.MethodParameter;
@@ -43,7 +43,7 @@ public class ResponseControllerAdvice implements ResponseBodyAdvice<Object> {
                 // 将数据包装在ResponseVO里后，再转换为json字符串响应给前端
                 return objectMapper.writeValueAsString(new ResponseVO<>(ResponseCode.SUCCESS,data));
             } catch (JsonProcessingException e) {
-                throw new APIException("返回String类型错误");
+                throw new ApiException(ResponseCode.JSON_CONVERSE_EXCEPTION);
             }
         }
         // 将原本的数据包装在ResponseVO里

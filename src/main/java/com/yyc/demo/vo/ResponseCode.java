@@ -15,6 +15,10 @@ public enum ResponseCode {
 
     API_CALL_FAILED(500,"API接口调用失败"),
 
+    JSON_CONVERSE_EXCEPTION(500,"JSON转换异常"),
+
+    NOT_FOUND_EXCEPTION(404,"未找到资源"),
+
     VALIDATE_FAILED(400, "参数校验失败"),
 
     ERROR(500, "未知错误");

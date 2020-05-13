@@ -5,6 +5,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import com.yyc.demo.dao.GreetingRepository;
 import com.yyc.demo.entity.Greeting;
+import com.yyc.demo.exception.ApiException;
+import com.yyc.demo.vo.ResponseCode;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -74,7 +76,8 @@ public class GreetController {
      */
     @GetMapping("/greeting/{id}")
     Greeting getGreet(@PathVariable Long id){
-        return this.greetingRepository.getOne(id);
+        return this.greetingRepository.findById(id)
+                .orElseThrow(()-> new ApiException(ResponseCode.NOT_FOUND_EXCEPTION));
     }
 
     /**
@@ -106,6 +109,7 @@ public class GreetController {
      */
     @DeleteMapping("/greeting/{id}")
     void deleteGreet(@PathVariable Long id){
+
         this.greetingRepository.deleteById(id);
     }
 

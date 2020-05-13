@@ -1,8 +1,9 @@
 package com.yyc.demo.config;
 
-import com.yyc.demo.exception.APIException;
+import com.yyc.demo.exception.ApiException;
 import com.yyc.demo.vo.ResponseCode;
 import com.yyc.demo.vo.ResponseVO;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,9 +34,25 @@ public class ExceptionControllerAdvice {
         return new ResponseVO<>(ResponseCode.VALIDATE_FAILED,objectError.getDefaultMessage());
     }
 
-    @ExceptionHandler(APIException.class)
-    public ResponseVO<String> APIExceptionHandler(APIException e) {
+    /**
+     * 自定义异常ApiException处理
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(ApiException.class)
+    public ResponseVO<String> APIExceptionHandler(ApiException e) {
         // 返回自定义实体类型
         return new ResponseVO<>(ResponseCode.API_CALL_FAILED,e.getMsg());
+    }
+
+    /**
+     * EmptyResultDataAccessException处理
+     * 删除数据库中不存在的资源会抛出这个异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public ResponseVO<String> EmptyResultDataAccessExceptionHandler(EmptyResultDataAccessException e){
+        return new ResponseVO<>(ResponseCode.SUCCESS,null);
     }
 }
