@@ -22,7 +22,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * 所以如果有些情况不需要进行增强操作可以在supports方法里进行判断。
  * 对返回数据进行真正的操作还是在beforeBodyWrite方法中
  *
- * 注意：要加上需要扫描的包
+ * 注意：要加上需要扫描的包,否则可能造成swagger无法访问
  */
 @RestControllerAdvice(basePackages = {"com.yyc.demo.controller"})
 public class ResponseControllerAdvice implements ResponseBodyAdvice<Object> {

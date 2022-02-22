@@ -1,12 +1,9 @@
 package com.yyc.demo.vo;
 
-import lombok.Getter;
-
 /**
  * 统一的响应码枚举类
  * @author yyc
  */
-@Getter
 public enum ResponseCode {
 
     SUCCESS(200, "操作成功"),
@@ -31,6 +28,11 @@ public enum ResponseCode {
         this.msg = msg;
     }
 
+    public Integer getCode() {
+        return code;
+    }
 
-
+    public String getMsg() {
+        return msg;
+    }
 }

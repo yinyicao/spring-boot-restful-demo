@@ -39,11 +39,7 @@ public class GreetController {
      */
     @GetMapping("/test")
     public Greeting test(@RequestParam(value = "name",defaultValue = "World!") String name){
-        return Greeting
-                .builder()
-                .id(counter.incrementAndGet())
-                .content(String.format(TEMPLATE,name))
-                .build();
+        return new Greeting(counter.incrementAndGet(),String.format(TEMPLATE,name));
     }
 
     /**
