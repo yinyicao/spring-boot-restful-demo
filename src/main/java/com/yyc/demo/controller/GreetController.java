@@ -7,6 +7,8 @@ import com.yyc.demo.dao.GreetingRepository;
 import com.yyc.demo.entity.Greeting;
 import com.yyc.demo.exception.ApiException;
 import com.yyc.demo.vo.ResponseCode;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,6 +20,7 @@ import javax.validation.Valid;
  * @author: yyc
  * @create: 2020-05-11 15:39
  **/
+@Api(tags="XXX管理")
 @RestController
 public class GreetController {
 
@@ -37,6 +40,7 @@ public class GreetController {
      * @param name
      * @return
      */
+    @ApiOperation(value = "测试接口",notes = "测试方法接口，请求/test。" + "<br>默认返回Hello World!")
     @GetMapping("/test")
     public Greeting test(@RequestParam(value = "name",defaultValue = "World!") String name){
         return new Greeting(counter.incrementAndGet(),String.format(TEMPLATE,name));

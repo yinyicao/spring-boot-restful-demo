@@ -7,21 +7,22 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 /**
- * Swagger配置类.生成API文档，文档地址：http://localhost:8081/swagger-ui.html
+ * Swagger配置类.生成API文档，文档地址：http://localhost:8081/swagger-ui/index.html
  *
- * "@EnableSwagger2" Swagger的开关，表示已经启用Swagger
+ * http://springfox.github.io/springfox/
  * "@Configuration" 声明当前配置类
+ * 在启动类上需加入@EnableWebMvc注解
  * @author yyc
  */
-@EnableSwagger2
+@EnableOpenApi
 @Configuration
 public class SwaggerConfiguration {
 
@@ -81,10 +82,11 @@ public class SwaggerConfiguration {
 
     @Bean
     public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.OAS_30)
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(basePackage))
+                // .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
                 .build();
     }

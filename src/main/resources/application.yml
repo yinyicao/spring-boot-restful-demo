@@ -1,23 +1,28 @@
 server:
   port: 8081
 spring:
-#  devtools:
-#    restart:
-#      enabled: true  #设置开启热部署
-#      additional-paths: src/main/java,resources/**,static/** #重启目录
-#    livereload:
-#      enabled: true
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+      additional-paths: src/main/java,resources/**,static/** #重启目录
+    livereload:
+      enabled: true
   jpa:
     database: h2
     show-sql: true
     hibernate:
       ddl-auto: update
+    generate-ddl: true
   datasource:
     url: jdbc:h2:mem:test;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
     driver-class-name: org.h2.Driver
     username: sa
     password:
-    data: classpath:db/*.sql
+  sql:
+    init:
+      # 先关闭，否则表还没创建好导致报错：表不存在
+      mode: never
+      data-locations: classpath:db/*.sql
 # swagger配置
 swagger:
   # 标题
